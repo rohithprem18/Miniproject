@@ -1,6 +1,9 @@
 import { NextApiRequest, NextApiResponse } from "next";
-import { getSessionServer } from "@/utils/auth-server";
-import { prisma } from "@/prisma/client";
+import { PrismaClient } from "@prisma/client";
+import { getSessionServer } from "@/utils/auth";
+import { MongoClient } from "mongodb";
+
+const prisma = new PrismaClient();
 
 export default async function handler(
   req: NextApiRequest,
@@ -68,11 +71,7 @@ export default async function handler(
           supplier: supplier?.name || "Unknown",
         });
       } catch (error) {
-        console.error("Error creating product:", error);
-        res.status(500).json({ 
-          error: "Failed to create product",
-          details: error instanceof Error ? error.message : "Unknown error"
-        });
+        res.status(500).json({ error: "Failed to create product" });
       }
       break;
 
@@ -109,11 +108,7 @@ export default async function handler(
 
         res.status(200).json(transformedProducts);
       } catch (error) {
-        console.error("Error fetching products:", error);
-        res.status(500).json({ 
-          error: "Failed to fetch products",
-          details: error instanceof Error ? error.message : "Unknown error"
-        });
+        res.status(500).json({ error: "Failed to fetch products" });
       }
       break;
 
@@ -167,11 +162,7 @@ export default async function handler(
           supplier: supplier?.name || "Unknown",
         });
       } catch (error) {
-        console.error("Error updating product:", error);
-        res.status(500).json({ 
-          error: "Failed to update product",
-          details: error instanceof Error ? error.message : "Unknown error"
-        });
+        res.status(500).json({ error: "Failed to update product" });
       }
       break;
 
@@ -185,11 +176,7 @@ export default async function handler(
 
         res.status(204).end();
       } catch (error) {
-        console.error("Error deleting product:", error);
-        res.status(500).json({ 
-          error: "Failed to delete product",
-          details: error instanceof Error ? error.message : "Unknown error"
-        });
+        res.status(500).json({ error: "Failed to delete product" });
       }
       break;
 

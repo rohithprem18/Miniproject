@@ -1,5 +1,5 @@
 import { NextApiRequest, NextApiResponse } from "next";
-import { getSessionServer } from "@/utils/auth-server";
+import { getSessionServer } from "@/utils/auth";
 
 export default async function handler(
   req: NextApiRequest,
@@ -25,10 +25,6 @@ export default async function handler(
       updatedAt: user.updatedAt,
     });
   } catch (error) {
-    console.error("Error getting session:", error);
-    res.status(500).json({ 
-      error: "Internal Server Error",
-      details: error instanceof Error ? error.message : "Unknown error"
-    });
+    res.status(500).json({ error: "Internal Server Error" });
   }
 }

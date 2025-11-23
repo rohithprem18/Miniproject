@@ -1,8 +1,10 @@
 import { NextApiRequest, NextApiResponse } from "next";
+import { PrismaClient } from "@prisma/client";
 import bcrypt from "bcryptjs";
-import { generateToken } from "@/utils/auth-server";
+import { generateToken } from "../../../utils/auth";
 import Cookies from "cookies";
-import { prisma } from "@/prisma/client";
+
+const prisma = new PrismaClient();
 
 export default async function login(req: NextApiRequest, res: NextApiResponse) {
   const allowedOrigins = [

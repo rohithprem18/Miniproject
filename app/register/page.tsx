@@ -47,18 +47,11 @@ export default function Register() {
       } else {
         throw new Error("Registration failed");
       }
-    } catch (error: any) {
-      // Extract error message from axios response
-      const errorMessage = 
-        error?.response?.data?.error || 
-        error?.response?.data?.details?.[0]?.message ||
-        error?.message || 
-        "An unknown error occurred. Please try again.";
-      
+    } catch (error) {
       // Show error toast
       toast({
         title: "Registration Failed",
-        description: errorMessage,
+        description: error instanceof Error ? error.message : "An unknown error occurred.",
         variant: "destructive",
       });
     } finally {

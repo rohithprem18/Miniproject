@@ -4,7 +4,7 @@ import React, { createContext, useContext, useState, useEffect } from "react";
 //import axios from "axios";
 import Cookies from "js-cookie";
 import axiosInstance from "@/utils/axiosInstance";
-import { getSessionClient } from "@/utils/auth-client";
+import { getSessionClient } from "@/utils/auth";
 
 interface User {
   id: string;

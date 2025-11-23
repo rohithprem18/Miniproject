@@ -1,5 +1,5 @@
 import { NextApiRequest, NextApiResponse } from "next";
-import { getSessionServer } from "../utils/auth-server"; // Use named import
+import { getSessionServer } from "../utils/auth"; // Use named import
 
 export const authMiddleware = async (
   req: NextApiRequest,
